@@ -17,7 +17,7 @@ namespace ManamaxExtra
         private bool[] controlUseItemOld;
         private int[] itemUseTime;
 
-        public LifemaxExtra(Main game) : base(game)
+        public ManamaxExtra(Main game) : base(game)
         {
             LoadConfig();
             this.controlUseItemOld = new bool[255];
