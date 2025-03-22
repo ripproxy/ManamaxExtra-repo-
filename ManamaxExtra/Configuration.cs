@@ -9,7 +9,7 @@ namespace ManamaxExtra
     public class Configuration
     {
         public static readonly string FilePath = Path.Combine(TShock.SavePath, "ManamaxExtra.json");
-        [JsonProperty("使用生命水晶最高可提升至")]
+        [JsonProperty("ManaCrystalMaxMana")]
         public int ManaCrystalMaxMana = 1000;
 
         public void Write(string path)
