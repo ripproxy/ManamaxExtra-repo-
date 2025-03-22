@@ -4,7 +4,7 @@ using TShockAPI;
 using TShockAPI.Hooks;
 using static TShockAPI.GetDataHandlers;
 
-namespace LifemaxExtra
+namespace ManamaxExtra
 {
     [ApiVersion(2, 1)]
     public class ManamaxExtra : TerrariaPlugin
@@ -72,11 +72,11 @@ namespace LifemaxExtra
             Player tplayer = tsplayer.TPlayer;
 
             // 如果生命上限大于配置的最大值
-            if (tplayer.statManaMax > Config.LifeFruitMaxLife)
+            if (tplayer.statManaMax > Config.ManaCrystalMaxMana)
             {
                 // 将生命值设置为配置的最大值
-                tplayer.statLifeMax = Config.LifeFruitMaxLife;
-                tsplayer.SendData(PacketTypes.PlayerHp, "", index);
+                tplayer.statManaMax = Config.ManaCrystalMaxMana;
+                tsplayer.SendData(PacketTypes.PlayerMp, "", index);
             }
         }
 
@@ -94,21 +94,21 @@ namespace LifemaxExtra
                     int useTime = heldItem.useTime; // 获取物品使用时间
                     int type = heldItem.type; // 获取物品类型
 
-                    if (type != 29) // 如果物品不是 ID 为 29 的物品
+                    if (type != 109) // 如果物品不是 ID 为 109 的物品
                     {
-                        if (tplayer.statLifeMax <= Config.LifeCrystalMaxLife) // 如果玩家的生命上限小于等于最大水晶生命值
+                        if (tplayer.statManaMax <= Config.ManaCrystalMaxMana) // 如果玩家的生命上限小于等于最大水晶生命值
                         {
-                            if (tsplayer.TPlayer.statLifeMax < Config.LifeCrystalMaxLife) // 如果玩家当前生命上限小于配置的最大水晶生命值
+                            if (tsplayer.TPlayer.statManaMax < Config.ManaCrystalMaxMana) // 如果玩家当前生命上限小于配置的最大水晶生命值
                             {
                                 tsplayer.TPlayer.inventory[tplayer.selectedItem].stack--; // 减少玩家背包中选定物品的堆叠数量
                                 tsplayer.SendData(PacketTypes.PlayerSlot, "", index, (float)tplayer.selectedItem); // 更新客户端的选定物品槽位
-                                tplayer.statLifeMax += 20; // 增加玩家的生命上限
-                                tsplayer.SendData(PacketTypes.PlayerHp, "", index); // 更新客户端的生命值显示
+                                tplayer.statManaMax += 20; // 增加玩家的生命上限
+                                tsplayer.SendData(PacketTypes.PlayerMp, "", index); // 更新客户端的生命值显示
                             }
-                            else if (tsplayer.TPlayer.statLifeMax > Config.LifeFruitMaxLife) // 如果玩家当前生命上限大于配置的最大果生命值
+                            else if (tsplayer.TPlayer.statManaMax > Config.ManaCrystalMaxMana) // 如果玩家当前生命上限大于配置的最大果生命值
                             {
-                                tplayer.statLifeMax = Config.LifeFruitMaxLife; // 将玩家的生命上限设置为配置的最大生命果生命值
-                                tsplayer.SendData(PacketTypes.PlayerHp, "", index); // 更新客户端的生命值显示
+                                tplayer.statManaMax = Config.ManaCrystalMaxMana; // 将玩家的生命上限设置为配置的最大生命果生命值
+                                tsplayer.SendData(PacketTypes.PlayerMp, "", index); // 更新客户端的生命值显示
                             }
                         }
                     }
