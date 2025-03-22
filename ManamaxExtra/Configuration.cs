@@ -11,8 +11,6 @@ namespace ManamaxExtra
         public static readonly string FilePath = Path.Combine(TShock.SavePath, "ManamaxExtra.json");
         [JsonProperty("使用生命水晶最高可提升至")]
         public int ManaCrystalMaxMana = 1000;
-        [JsonProperty("使用生命果最高可提升至")]
-        public int ManaCrystalMaxMana = 1000;
 
         public void Write(string path)
         {
