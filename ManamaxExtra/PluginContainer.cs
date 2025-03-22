@@ -76,7 +76,7 @@ namespace ManamaxExtra
             {
                 // 将生命值设置为配置的最大值
                 tplayer.statManaMax = Config.ManaCrystalMaxMana;
-                tsplayer.SendData(PacketTypes.PlayerMp, "", index);
+                tsplayer.SendData(PacketTypes.PlayerMana, "", index);
             }
         }
 
@@ -103,12 +103,12 @@ namespace ManamaxExtra
                                 tsplayer.TPlayer.inventory[tplayer.selectedItem].stack--; // 减少玩家背包中选定物品的堆叠数量
                                 tsplayer.SendData(PacketTypes.PlayerSlot, "", index, (float)tplayer.selectedItem); // 更新客户端的选定物品槽位
                                 tplayer.statManaMax += 20; // 增加玩家的生命上限
-                                tsplayer.SendData(PacketTypes.PlayerMp, "", index); // 更新客户端的生命值显示
+                                tsplayer.SendData(PacketTypes.PlayerMana, "", index); // 更新客户端的生命值显示
                             }
                             else if (tsplayer.TPlayer.statManaMax > Config.ManaCrystalMaxMana) // 如果玩家当前生命上限大于配置的最大果生命值
                             {
                                 tplayer.statManaMax = Config.ManaCrystalMaxMana; // 将玩家的生命上限设置为配置的最大生命果生命值
-                                tsplayer.SendData(PacketTypes.PlayerMp, "", index); // 更新客户端的生命值显示
+                                tsplayer.SendData(PacketTypes.PlayerMana, "", index); // 更新客户端的生命值显示
                             }
                         }
                     }
