@@ -94,7 +94,7 @@ namespace ManamaxExtra
                     int useTime = heldItem.useTime; // Dapatkan waktu penggunaan item
                     int type = heldItem.type; // Dapatkan jenis barang
 
-                    if (type != 109) // Jika barang tersebut bukan barang dengan ID 109
+                    if (type == 109) // Jika barang tersebut bukan barang dengan ID 109
                     {
                         if (tplayer.statManaMax <= Config.ManaCrystalMaxMana) // Jika kesehatan maksimum pemain kurang dari atau sama dengan kesehatan kristal maksimum
                         {
