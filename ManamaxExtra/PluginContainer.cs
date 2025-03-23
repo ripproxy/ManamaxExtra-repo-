@@ -9,8 +9,8 @@ namespace ManamaxExtra
     [ApiVersion(2, 1)]
     public class ManamaxExtra : TerrariaPlugin
     {
-        public override string Author => "佚名，肝帝熙恩添加自定义";
-        public override string Description => "提升生命值上限";
+        public override string Author => "Anonim, Kaisar Hati Xien menambahkan penyesuaian";
+        public override string Description => "Tingkatkan batas mana";
         public override string Name => "ManamaxExtra";
         public override Version Version => new Version(1, 0, 0, 6);
         public static Configuration Config;
@@ -33,7 +33,7 @@ namespace ManamaxExtra
         private static void ReloadConfig(ReloadEventArgs args)
         {
             LoadConfig();
-            args.Player?.SendSuccessMessage("[{0}] 重新加载配置完毕。", typeof(ManamaxExtra).Name);
+            args.Player?.SendSuccessMessage("[{0}] Konfigurasi pemuatan ulang selesai", typeof(ManamaxExtra).Name);
         }
 
         public override void Initialize()
@@ -60,7 +60,7 @@ namespace ManamaxExtra
             {
                 if (tsplayer != null)
                 {
-                    // 检查生命上限并设置生命值
+                    // Periksa batas mana dan tetapkan nilai mana
                     CheckAndSetPlayerMana(tsplayer);
                 }
             }
@@ -71,10 +71,10 @@ namespace ManamaxExtra
             int index = tsplayer.Index;
             Player tplayer = tsplayer.TPlayer;
 
-            // 如果生命上限大于配置的最大值
+            // Jika batas atas masa pakai lebih besar dari nilai maksimum yang dikonfigurasi
             if (tplayer.statManaMax > Config.ManaCrystalMaxMana)
             {
-                // 将生命值设置为配置的最大值
+                // Atur kesehatan ke maksimum yang dikonfigurasi
                 tplayer.statManaMax = Config.ManaCrystalMaxMana;
                 tsplayer.SendData(PacketTypes.PlayerMana, "", index);
             }
@@ -91,24 +91,24 @@ namespace ManamaxExtra
 
                 if (!this.controlUseItemOld[index] && tsplayer.TPlayer.controlUseItem && this.itemUseTime[index] <= 0)
                 {
-                    int useTime = heldItem.useTime; // 获取物品使用时间
-                    int type = heldItem.type; // 获取物品类型
+                    int useTime = heldItem.useTime; // Dapatkan waktu penggunaan item
+                    int type = heldItem.type; // Dapatkan jenis barang
 
-                    if (type != 109) // 如果物品不是 ID 为 109 的物品
+                    if (type != 109) // Jika barang tersebut bukan barang dengan ID 109
                     {
-                        if (tplayer.statManaMax <= Config.ManaCrystalMaxMana) // 如果玩家的生命上限小于等于最大水晶生命值
+                        if (tplayer.statManaMax <= Config.ManaCrystalMaxMana) // Jika kesehatan maksimum pemain kurang dari atau sama dengan kesehatan kristal maksimum
                         {
-                            if (tsplayer.TPlayer.statManaMax < Config.ManaCrystalMaxMana) // 如果玩家当前生命上限小于配置的最大水晶生命值
+                            if (tsplayer.TPlayer.statManaMax < Config.ManaCrystalMaxMana) // Jika batas hidup pemain saat ini kurang dari nilai kesehatan kristal maksimum yang dikonfigurasi
                             {
-                                tsplayer.TPlayer.inventory[tplayer.selectedItem].stack--; // 减少玩家背包中选定物品的堆叠数量
-                                tsplayer.SendData(PacketTypes.PlayerSlot, "", index, (float)tplayer.selectedItem); // 更新客户端的选定物品槽位
-                                tplayer.statManaMax += 20; // 增加玩家的生命上限
-                                tsplayer.SendData(PacketTypes.PlayerMana, "", index); // 更新客户端的生命值显示
+                                tsplayer.TPlayer.inventory[tplayer.selectedItem].stack--; // Mengurangi jumlah tumpukan item yang dipilih di ransel pemain
+                                tsplayer.SendData(PacketTypes.PlayerSlot, "", index, (float)tplayer.selectedItem); // Memperbarui slot item yang dipilih klien
+                                tplayer.statManaMax += 20; // Tingkatkan batas hidup pemain
+                                tsplayer.SendData(PacketTypes.PlayerMana, "", index); // Perbarui tampilan kesehatan klien
                             }
-                            else if (tsplayer.TPlayer.statManaMax > Config.ManaCrystalMaxMana) // 如果玩家当前生命上限大于配置的最大果生命值
+                            else if (tsplayer.TPlayer.statManaMax > Config.ManaCrystalMaxMana) // Jika batas hidup pemain saat ini lebih besar dari nilai kesehatan maksimum yang dikonfigurasi
                             {
-                                tplayer.statManaMax = Config.ManaCrystalMaxMana; // 将玩家的生命上限设置为配置的最大生命果生命值
-                                tsplayer.SendData(PacketTypes.PlayerMana, "", index); // 更新客户端的生命值显示
+                                tplayer.statManaMax = Config.ManaCrystalMaxMana; // Tetapkan batas hidup maksimum pemain ke nilai kesehatan buah hidup maksimum yang dikonfigurasi
+                                tsplayer.SendData(PacketTypes.PlayerMana, "", index); // Perbarui tampilan kesehatan klien
                             }
                         }
                     }
