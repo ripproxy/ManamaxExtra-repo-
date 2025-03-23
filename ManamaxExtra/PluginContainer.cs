@@ -72,10 +72,10 @@ namespace ManamaxExtra
             Player tplayer = tsplayer.TPlayer;
 
             // Jika batas atas masa pakai lebih besar dari nilai maksimum yang dikonfigurasi
-            if (tplayer.statManaMax > Config.ManaCrystalMaxMana)
+            if (tplayer.statManaMax2 > Config.ManaCrystalMaxMana)
             {
                 // Atur kesehatan ke maksimum yang dikonfigurasi
-                tplayer.statManaMax = Config.ManaCrystalMaxMana;
+                tplayer.statManaMax2 = Config.ManaCrystalMaxMana;
                 tsplayer.SendData(PacketTypes.PlayerMana, "", index);
             }
         }
@@ -96,18 +96,18 @@ namespace ManamaxExtra
 
                     if (type == 109) // Jika barang tersebut bukan barang dengan ID 109
                     {
-                        if (tplayer.statManaMax <= Config.ManaCrystalMaxMana) // Jika kesehatan maksimum pemain kurang dari atau sama dengan kesehatan kristal maksimum
+                        if (tplayer.statManaMax2 <= Config.ManaCrystalMaxMana) // Jika kesehatan maksimum pemain kurang dari atau sama dengan kesehatan kristal maksimum
                         {
-                            if (tsplayer.TPlayer.statManaMax < Config.ManaCrystalMaxMana) // Jika batas hidup pemain saat ini kurang dari nilai kesehatan kristal maksimum yang dikonfigurasi
+                            if (tsplayer.TPlayer.statManaMax2 < Config.ManaCrystalMaxMana) // Jika batas hidup pemain saat ini kurang dari nilai kesehatan kristal maksimum yang dikonfigurasi
                             {
                                 tsplayer.TPlayer.inventory[tplayer.selectedItem].stack--; // Mengurangi jumlah tumpukan item yang dipilih di ransel pemain
                                 tsplayer.SendData(PacketTypes.PlayerSlot, "", index, (float)tplayer.selectedItem); // Memperbarui slot item yang dipilih klien
                                 tplayer.statManaMax += 20; // Tingkatkan batas hidup pemain
                                 tsplayer.SendData(PacketTypes.PlayerMana, "", index); // Perbarui tampilan kesehatan klien
                             }
-                            else if (tsplayer.TPlayer.statManaMax > Config.ManaCrystalMaxMana) // Jika batas hidup pemain saat ini lebih besar dari nilai kesehatan maksimum yang dikonfigurasi
+                            else if (tsplayer.TPlayer.statManaMax2 > Config.ManaCrystalMaxMana) // Jika batas hidup pemain saat ini lebih besar dari nilai kesehatan maksimum yang dikonfigurasi
                             {
-                                tplayer.statManaMax = Config.ManaCrystalMaxMana; // Tetapkan batas hidup maksimum pemain ke nilai kesehatan buah hidup maksimum yang dikonfigurasi
+                                tplayer.statManaMax2 = Config.ManaCrystalMaxMana; // Tetapkan batas hidup maksimum pemain ke nilai kesehatan buah hidup maksimum yang dikonfigurasi
                                 tsplayer.SendData(PacketTypes.PlayerMana, "", index); // Perbarui tampilan kesehatan klien
                             }
                         }
